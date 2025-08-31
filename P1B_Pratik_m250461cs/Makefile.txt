@@ -1,0 +1,20 @@
+CC=gcc
+CFLAGS=-std=c11 -Wall -Wextra -O2
+
+all: main
+
+main: main.o bookings.o operations.o
+	$(CC) $(CFLAGS) -o main main.o bookings.o operations.o
+
+main.o: main.c bookings.h operations.h
+	$(CC) $(CFLAGS) -c main.c
+
+bookings.o: bookings.c bookings.h
+	$(CC) $(CFLAGS) -c bookings.c
+
+operations.o: operations.c operations.h bookings.h
+	$(CC) $(CFLAGS) -c operations.c
+
+clean:
+	rm -f *.o main
+
