@@ -25,17 +25,60 @@ void displayBuses(struct Bus *singleBus)
 void addBus(struct Bus *singleBus)
 {
 
-  if (Buses_First == NULL)
-  {
-    Buses_First = singleBus;
-    Buses_Last = singleBus;
-  }
-  else
-  {
-    Buses_Last->next = singleBus;
-    Buses_Last = singleBus;
-  }
-  printf("%s Added\n", singleBus->Bus_Id);
+  // add Buses to linked list
+    if (Buses_First == NULL)
+    {
+      Buses_First = singleBus;
+      Buses_Last = singleBus;
+    }
+    else
+    {
+      //add bus in the correct position in the list
+      struct Bus *scanner,*comparator;
+      scanner = Buses_First;
+      comparator = Buses_First->next;
+
+      
+          while(comparator!=NULL){
+
+            if(scanner == Buses_First && strcmp(singleBus->Bus_Id,scanner->Bus_Id)<0){
+              singleBus->next = scanner;
+              Buses_First = singleBus;
+              break;
+            }
+            else if(strcmp(singleBus->Bus_Id,comparator->Bus_Id)<0){
+
+              scanner->next = singleBus;
+              singleBus->next = comparator;
+              
+              break;
+            }
+            else{
+
+            scanner = comparator;
+            comparator = comparator->next;
+            }
+
+          
+        }
+
+        if(comparator==NULL){
+          if(scanner == Buses_First && (strcmp(singleBus->Bus_Id,scanner->Bus_Id)<0) ){
+              
+                singleBus->next = scanner;
+                Buses_First = singleBus;
+                Buses_Last = scanner;
+           
+          }
+          else{
+            scanner->next = singleBus;
+            Buses_Last = singleBus;
+          }
+
+        }
+   
+    }
+  
 }
 
 void bookTicket(struct Passenger *singlePerson)

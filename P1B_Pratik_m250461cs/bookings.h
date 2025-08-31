@@ -20,7 +20,6 @@ struct Bus
   bool isFull;
   struct Passenger *List_of_Passengers, *List_of_Passengers_last, *waiting_list, *waiting_list_last;
   struct Bus *next;
-  struct Bus *last;
 };
 
 struct Bookings

@@ -35,7 +35,6 @@ int main()
     singleBus->List_of_Passengers_last = NULL;
     singleBus->waiting_list_last = NULL;
     singleBus->next = NULL;
-    singleBus->last = NULL;
     singleBus->Total_Passengers = 0;
     singleBus->Total_Waiting_Passengers = 0;
 
@@ -93,16 +92,8 @@ int main()
     // printf("%s\n",singleBus->Dropping_Point);
 
     // add Buses to linked list
-    if (Buses_First == NULL)
-    {
-      Buses_First = singleBus;
-      Buses_Last = singleBus;
-    }
-    else
-    {
-      Buses_Last->next = singleBus;
-      Buses_Last = singleBus;
-    }
+    addBus(singleBus);
+
   }
 
   displayBuses(Buses_First);
@@ -122,7 +113,6 @@ int main()
       singleBus->List_of_Passengers_last = NULL;
       singleBus->waiting_list_last = NULL;
       singleBus->next = NULL;
-      singleBus->last = NULL;
       singleBus->Total_Passengers = 0;
       singleBus->Total_Waiting_Passengers = 0;
 
@@ -180,6 +170,7 @@ int main()
       // printf("%s\n",singleBus->Dropping_Point);
 
       addBus(singleBus);
+      printf("%s Added\n", singleBus->Bus_Id);
     }
 
     if (operation == 'b')

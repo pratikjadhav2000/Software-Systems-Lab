@@ -1,7 +1,7 @@
 3
-AS25ZH2001,2,Aravind,Kattangal,Kunnamangalam
-KL11TS5005,4,Ravindra,Kalanthode,Kozhikode
 KL54BK1555,6,Routela,Kannur,Malapuram
+KL11TS5005,4,Ravindra,Kalanthode,Kozhikode
+AS25ZH2001,2,Aravind,Kattangal,Kunnamangalam
 b Alvida,8431054312,Kattangal,Kunnamangalam
 b Anisha,8889991446,Kalanthode,Kozhikode
 b Ravindra,8884444321,Kattangal,Kunnamangalam
