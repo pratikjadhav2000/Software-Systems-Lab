@@ -1,0 +1,66 @@
+3
+Akansha,9876543210,500,200
+Kumar,9876543211,300,150
+Alia,9876543212,700,250
+12
+Kozhikode,Munnar
+Malappuram,Kannur
+Kozhikode,Kannur
+Ernakulam,Thrissur
+Thrissur,Kanyakumari
+Kozhikode,Kasaragode
+Kozhikode,Bangalore
+Munnar,Ernakulam
+Ernakulam,Malappuram
+Munnar,Thrissur
+Malappuram,Kasaragode
+Malappuram,Kozhikode
+p
+e Alia,9876543212
+a Ceya,8912375850,300,300
+a Alia,9876543212,500,50
+m
+g Ernakulam,Kozhikode
+t
+
+
+
+//input for BST
+4
+Akansha,9876543210,500,200
+Kumar,9876543211,300,150
+Alia,9876543212,700,250
+Zareen,9876543210,600,300
+
+//input for min heap
+10
+30
+50
+70
+90
+80
+60
+40
+20
+0
+
+//input for graph
+
+12
+Kozhikode,Munnar
+Malappuram,Kannur
+Kozhikode,Kannur
+Ernakulam,Thrissur
+Thrissur,Kanyakumari
+Kozhikode,Kasaragode
+Kozhikode,Bangalore
+Munnar,Ernakulam
+Ernakulam,Malappuram
+Munnar,Thrissur
+Malappuram,Karargode
+Malappuram,Kozhikode
+
+//to find
+Ernakulam, Kozhikode
+
+
