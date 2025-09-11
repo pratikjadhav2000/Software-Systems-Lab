@@ -54,7 +54,7 @@ void getMostTraveled();
 void freeBST(Passenger *root_BST);
 
 // graph
-void addVertex(char *source, char *destination);
+void addVertex(char *source, char *destination,int edgeWeight);
 int findShortestDistance(char *source, char *destination);
 void freeGraph();
 
@@ -205,15 +205,26 @@ int main()
         // get destination_city_name
         arrayPlace = 0;
         char destination_city_name[30];
-        while ((inputChar = getchar()) != '\n')
+        while ((inputChar = getchar()) != ',')
         {
             destination_city_name[arrayPlace++] = inputChar;
         }
         destination_city_name[arrayPlace] = '\0';
+        
+        //get edge weight
+        char weight[20];
+        int edgeWeight;
+        arrayPlace = 0;
+        while ((inputChar = getchar()) != '\n')
+        {
+            weight[arrayPlace++] = inputChar;
+        }
+        weight[arrayPlace] = '\0';
+        edgeWeight = atoi(weight);
 
         // adding vertex call add function 2 times -> add(source,destination) & add(destination,source)
-        addVertex(source_city_name, destination_city_name);
-        addVertex(destination_city_name, source_city_name);
+        addVertex(source_city_name, destination_city_name,edgeWeight);
+        addVertex(destination_city_name, source_city_name,edgeWeight);
     }
 
     // print vertices
@@ -324,6 +335,7 @@ int main()
             for (i = 0; i < passengerCount; ++i)
             {
                 printf("%s,", passengerNames[i]);
+                
             }
             printf("%s\n", passengerNames[i]);
             passengerCount = -1;
@@ -385,6 +397,7 @@ int main()
             printf("%d\n", ShortestDistance);
         }
     }
+    printf("program terminated");
 
     // free memory
     freeBST(root_BST);
@@ -416,13 +429,14 @@ void retainPassengerDetails(Passenger *singlePassenger)
             {
                 // found a passenger
                 passengerfound = true;
-                // printf("Passenger Found");
+                // printf("Passenger %s",scanner->name);
 
                 // logic to update node values
                 scanner->travel_count++;
-                scanner->aggregated_ticket_expense += singlePassenger->aggregated_ticket_expense;
-                scanner->aggregated_discount_received += singlePassenger->aggregated_discount_received;
-
+                scanner->aggregated_ticket_expense = scanner->aggregated_ticket_expense + singlePassenger->aggregated_ticket_expense;
+                scanner->aggregated_discount_received = scanner->aggregated_discount_received + singlePassenger->aggregated_discount_received;
+                free(singlePassenger);
+                singlePassenger = scanner;
                 break;
             }
             else if (strcmp(singlePassenger->name, scanner->name) < 0)
@@ -477,7 +491,7 @@ void getInorderTraversal(Passenger *root_BST)
     getInorderTraversal(root_BST->left_child);
     // printf("%s %s %d %d\n",root_BST->name,root_BST->mobile_number, root_BST->aggregated_ticket_expense,root_BST->aggregated_discount_received);
     passengerNames[++passengerCount] = root_BST->name;
-    // printf("%s,", root_BST->name); // make global array of strings -> store these and then print it.
+    //printf("%s %d %d,", root_BST->name,root_BST->travel_count,root_BST->aggregated_discount_received); // make global array of strings -> store these and then print it.
     getInorderTraversal(root_BST->right_child);
 }
 
@@ -524,7 +538,7 @@ int checkEligible(char *passengerName, char *mobileNumber)
         }
 
         if (!passengerfound)
-            return -1;
+            return 0;
     }
 }
 
@@ -547,7 +561,7 @@ void freeBST(Passenger *root_BST)
 }
 
 // graph
-void addVertex(char *source, char *destination)
+void addVertex(char *source, char *destination,int edgeWeight)
 {
 
     // create Vertex
@@ -560,7 +574,7 @@ void addVertex(char *source, char *destination)
     // create Ajacent node
     adjacentNode *singleadjacent = (adjacentNode *)malloc(sizeof(adjacentNode));
     strcpy(singleadjacent->city_name, destination);
-    singleadjacent->weight = 1;
+    singleadjacent->weight = edgeWeight;
     singleadjacent->next = NULL;
 
     // add source as vertex to list
@@ -664,6 +678,7 @@ int findShortestDistance(char *source, char *destination)
     displayMinHeap();
     printf("\n***********\n");
     */
+    
 
     // find adjacent of source & update values in heap
     if (sourceVertex->adjacencyFirst == NULL)
@@ -672,7 +687,7 @@ int findShortestDistance(char *source, char *destination)
     adjacentNode *adjacentNodeofVertex = sourceVertex->adjacencyFirst;
     while (adjacentNodeofVertex != NULL)
     {
-
+        //printf("%s %d",adjacentNodeofVertex->city_name, adjacentNodeofVertex->weight);
         updateMinheap(adjacentNodeofVertex->city_name, adjacentNodeofVertex->weight);
 
         adjacentNodeofVertex = adjacentNodeofVertex->next;
@@ -683,6 +698,7 @@ int findShortestDistance(char *source, char *destination)
     displayMinHeap();
     printf("\n***************\n");
     */
+    
 
     // pop from heap and add weight to shortest distance
     while (minheapIndex >= 0)
@@ -795,7 +811,6 @@ void heapify_top(int index)
         // only left child case
         if ((leftChild <= minheapIndex) && (rightChild > minheapIndex) && (minheap[index]->aggregated_weight_offered > minheap[leftChild]->aggregated_weight_offered))
         {
-
             // swap with left child
             tempCity = minheap[index];
             minheap[index] = minheap[leftChild];
@@ -855,21 +870,21 @@ void displayMinHeap()
     int newline = 2;
     for (int i = 0; i <= minheapIndex; ++i)
     {
-
-        printf("%d ", minheap[i]->aggregated_weight_offered);
+        //printf("%d(%s)", minheap[i]->aggregated_weight_offered,minheap[i]->city_name);
+        printf("%d)", minheap[i]->aggregated_weight_offered);
 
         if (newline - 1 == i + 1)
         {
             printf("\n");
             newline *= 2;
         }
-    }
+    } 
 }
 
 void updateMinheap(char *cityName, int weight)
 {
 
-    for (int i = 0; i < minheapIndex; ++i)
+    for (int i = 0; i <= minheapIndex; ++i)
     {
         if (strcmp(minheap[i]->city_name, cityName) == 0)
         {
