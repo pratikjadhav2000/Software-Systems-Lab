@@ -1,0 +1,204 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{natbib}
+
+% Define colors
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Code listing style
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+% Custom section formatting
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% Title information
+\title{Blockchain Technology: Beyond Cryptocurrency Applications}
+\author{Pratik Umesh Jadhav \\ National Institute of Technology Calicut}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Blockchain technology, initially developed as the underlying architecture for cryptocurrencies, has evolved into a transformative technology with applications across numerous industries. This report explores the fundamental concepts of blockchain, its technical underpinnings, and its expanding role beyond financial applications. We examine how distributed ledger technology is being implemented in supply chain management, healthcare, voting systems, and intellectual property protection. The report also discusses challenges and future directions for blockchain adoption, including scalability issues, energy consumption concerns, and regulatory frameworks.
+\end{abstract}
+
+\section{Introduction}
+Blockchain technology represents a paradigm shift in how information is stored, verified, and transferred across digital networks. Originally conceptualized in 1991 by Stuart Haber and W. Scott Stornetta \cite{haber1991}, it gained prominence with the introduction of Bitcoin by Satoshi Nakamoto in 2008 \cite{nakamoto2008}. While cryptocurrencies remain its most famous application, blockchain's potential extends far beyond digital currencies.
+
+The core innovation of blockchain is its ability to create tamper-resistant, decentralized databases without requiring a central authority. This characteristic makes it particularly valuable in scenarios where trust, transparency, and security are paramount. This report explores the technical foundations of blockchain technology and its diverse applications across various sectors.
+
+\section{Basic Concepts}
+
+\subsection{How Blockchain Works}
+A blockchain is essentially a distributed database maintained by a network of computers, where each participant has a copy of the entire database. Transactions are grouped into blocks, which are cryptographically linked to form a chain. The process involves:
+
+\begin{enumerate}
+    \item Transaction initiation between parties
+    \item Verification of the transaction by network nodes
+    \item Grouping verified transactions into a block
+    \item Adding the block to the existing chain through a consensus mechanism
+    \item Updating all copies of the blockchain across the network
+\end{enumerate}
+
+\subsection{Cryptographic Foundations}
+Blockchain relies on several cryptographic principles:
+
+\begin{itemize}
+    \item \textbf{Hash Functions}: Cryptographic algorithms that convert input data into fixed-size strings
+    \item \textbf{Public-Key Cryptography}: Enables secure transactions between parties
+    \item \textbf{Digital Signatures}: Verify the authenticity of transactions
+\end{itemize}
+
+The security of a blockchain is maintained through its consensus algorithms. The most common are:
+
+\begin{equation}
+\text{Proof of Work: } \min_{nonce} H(block\,header\,||\,nonce) < target
+\end{equation}
+
+\begin{equation}
+\text{Proof of Stake: } validator\,stake \times randomness \geq threshold
+\end{equation}
+
+\subsection{Types of Blockchains}
+Blockchains can be categorized based on their accessibility:
+
+\begin{table}[h]
+\centering
+\caption{Comparison of Blockchain Types}
+\begin{tabular}{|p{3cm}|p{4cm}|p{4cm}|}
+\hline
+\textbf{Type} & \textbf{Access Permission} & \textbf{Examples} \\
+\hline
+Public & Open to anyone & Bitcoin, Ethereum \\
+\hline
+Private & Restricted access & Hyperledger Fabric \\
+\hline
+Consortium & Controlled by a group & R3 Corda \\
+\hline
+Hybrid & Combination of features & Dragonchain \\
+\hline
+\end{tabular}
+\label{tab:blockchain_types}
+\end{table}
+
+\section{Applications Beyond Cryptocurrency}
+
+\subsection{Supply Chain Management}
+Blockchain enables end-to-end visibility in supply chains by creating an immutable record of product journeys from origin to consumer. This transparency helps in:
+
+\begin{itemize}
+    \item Verifying product authenticity and preventing counterfeiting
+    \item Tracking ethical sourcing of materials
+    \item Reducing paperwork and administrative costs
+    \item Improving recall management when issues arise
+\end{itemize}
+
+Companies like Walmart and Maersk have implemented blockchain solutions to track food products and shipping containers, respectively, resulting in significant efficiency improvements.
+
+\subsection{Healthcare Data Management}
+The healthcare industry benefits from blockchain through:
+
+\begin{itemize}
+    \item Secure patient data exchange between providers
+    \item Immutable audit trails for medical records
+    \item Drug traceability to combat counterfeit medications
+    \item Clinical trial transparency and data integrity
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{{images/blockchain_image.png}}
+\caption{Blockchain application in healthcare data management}
+\label{fig:healthcare}
+\end{figure}
+
+\subsection{Voting Systems}
+Blockchain-based voting systems offer:
+
+\begin{itemize}
+    \item Enhanced security against tampering
+    \transparent and verifiable election processes
+    \item Accessibility for remote voting
+    \item Reduced costs compared to traditional voting systems
+\end{itemize}
+
+Several countries, including Estonia and Switzerland, have experimented with blockchain voting systems with promising results.
+
+\section{Technical Challenges}
+
+Despite its potential, blockchain technology faces several challenges:
+
+\subsection{Scalability Issues}
+Most blockchain networks struggle with transaction throughput. For comparison:
+
+\begin{table}[h]
+\centering
+\caption{Transaction Throughput Comparison}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Platform} & \textbf{Transactions per Second} \\
+\hline
+Bitcoin & 7 \\
+\hline
+Ethereum & 15-30 \\
+\hline
+Visa & 24,000 \\
+\hline
+Hyperledger Fabric & 3,500+ \\
+\hline
+\end{tabular}
+\label{tab:throughput}
+\end{table}
+
+Solutions being developed include sharding, sidechains, and layer-2 protocols like the Lightning Network.
+
+\subsection{Energy Consumption}
+Proof-of-Work consensus mechanisms require substantial computational power, leading to high energy consumption. Alternatives like Proof-of-Stake are more energy-efficient but present different security considerations.
+
+\subsection{Regulatory Uncertainty}
+The legal status of blockchain applications varies across jurisdictions, creating challenges for widespread adoption, particularly in highly regulated industries like finance and healthcare.
+
+\section{Conclusion}
+Blockchain technology represents a significant advancement in distributed systems with potential applications across numerous sectors. While challenges remain in scalability, energy efficiency, and regulatory frameworks, ongoing research and development continue to address these issues. As the technology matures, we can expect to see broader adoption of blockchain solutions that enhance transparency, security, and efficiency in various domains beyond cryptocurrency.
+
+Future directions for blockchain technology include integration with artificial intelligence, Internet of Things devices, and the development of more efficient consensus mechanisms. Interoperability between different blockchain networks will also be crucial for widespread adoption.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
